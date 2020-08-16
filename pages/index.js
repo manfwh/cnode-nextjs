@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter} from 'next/router'
 import Layout from '@/components/Layout'
-import Nav from '@/components/nav'
+import Nav from '@/components/Nav'
 import TopicsList from '@/components/TopicsList'
 
 export default function Home() {
