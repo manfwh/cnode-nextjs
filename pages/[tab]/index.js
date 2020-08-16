@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import ErrorPage from 'next/error'
 import { useRouter} from 'next/router'
 import Layout from '@/components/Layout'
 import Nav from '@/components/nav'
@@ -9,11 +10,14 @@ export default function Home() {
   const tabs = [
     { name: '全部', tab: '/' },
     { name: '精华', tab: '/good' },
-    { name: '分析', tab: '/share' },
+    { name: '分享', tab: '/share' },
     { name: '问答', tab: '/ask' },
     { name: '招聘', tab: '/job' },
     // { name: '客户端测试', tab: 'dev' },
   ]
+  if(!tabs.some(item => item.tab === '/' + router.query.tab)) {
+    return <ErrorPage statusCode={404} />
+  }
   return (
 
     <Layout>
@@ -34,18 +38,3 @@ export default function Home() {
 
   )
 }
-
-  // {/* <main className={styles.main}>
-
-  //     </main>
-
-  //     <footer className={styles.footer}>
-  //       <a
-  //         href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Powered by{' '}
-  //         <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-  //       </a>
-  //     </footer> */}
