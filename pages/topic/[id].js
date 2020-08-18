@@ -112,7 +112,7 @@ const Topic = ({ topic, user }) => {
                         {
                           user.recent_topics.slice(0, 5).map(item => (
                             <li key={item.id} className="py-2">
-                              <Link href={`/topic/${item.id}`}>
+                              <Link href="/topic/[id]" as={`/topic/${item.id}`}>
                                 <a title={item.title} className="text-gray-600 hover:text-gray-700 text-sm truncate max-w-full block">{item.title}</a>
                               </Link>
                             </li>
@@ -132,7 +132,7 @@ const Topic = ({ topic, user }) => {
                       {
                         user.recent_replies.slice(0, 5).map(item => (
                           <li key={item.id} className="py-2">
-                            <Link href={`/topic/${item.id}`}>
+                            <Link href="/topic/[id]" as={`/topic/${item.id}`}>
                               <a title={item.title} className="text-gray-600 hover:text-gray-700 text-sm truncate max-w-full block">{item.title}</a>
                             </Link>
                           </li>

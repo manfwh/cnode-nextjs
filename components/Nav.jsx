@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import clnx from 'classnames'
@@ -8,7 +9,7 @@ const Nav = ({ tabs }) => {
     <nav>
       {
         tabs.map(item => (
-          <Link key={item.tab} href={item.tab === '/' ? '/' : '/[tab]'} as={`${item.tab}`}>
+          <Link key={item.tab} href={item.tab === 'all' ? '/' : '/[tab]'} as={ item.tab === 'all' ? '/' : `/${item.tab}`}>
             <a className={clnx(
               'px-2 py-1 rounded',
               {
@@ -23,4 +24,4 @@ const Nav = ({ tabs }) => {
   )
 }
 
-export default Nav
+export default memo(Nav)
