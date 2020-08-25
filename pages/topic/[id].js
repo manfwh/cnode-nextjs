@@ -47,7 +47,7 @@ const Topic = ({ topic, user }) => {
                   </div>
                 </div>
                 <section className="px-4 md:px-0">
-                  <div className="prose prose-sm md:px-8 md:py-4 lg:prose-lg max-w-none mx-auto" dangerouslySetInnerHTML={{ __html: topic.content }}></div>
+                  <div className="prose prose-sm md:px-8 md:py-4 max-w-none mx-auto" dangerouslySetInnerHTML={{ __html: topic.content }}></div>
                 </section>
               </article>
               <div className="mt-4 mb-8">
@@ -74,7 +74,7 @@ const Topic = ({ topic, user }) => {
                               <span className="text-xs ml-1">{item.ups.length}</span>
                             </span>
                           </div>
-                          <div className="prose-sm mb-4" dangerouslySetInnerHTML={{ __html: item.content }}></div>
+                          <div className="prose prose-sm max-w-none mb-4" dangerouslySetInnerHTML={{ __html: item.content }}></div>
                         </div>
                       </li>
                     ))
