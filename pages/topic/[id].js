@@ -45,6 +45,7 @@ const Topic = ({ topic, user }) => {
                 •  {topic.visit_count} 次浏览 •  最后一次编辑是 {dayjs(topic.last_reply_at).fromNow()}
                 •  来自 <Link href="/[tab]" as={`/${topic.tab}`}><a className="text-blue-600">{getTabName(topic.tab)}</a></Link>
                   </div>
+                  
                 </div>
                 <section className="px-4 md:px-0">
                   <div className="prose prose-sm md:px-8 md:py-4 max-w-none mx-auto" dangerouslySetInnerHTML={{ __html: topic.content }}></div>
