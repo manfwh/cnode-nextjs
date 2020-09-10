@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import NProgress from '@/components/nprogress';
+import GlobalProvider from '../store'
 dayjs.locale('zh-cn')
 dayjs.extend(relativeTime)
 
@@ -14,7 +15,9 @@ function MyApp({ Component, pageProps }) {
       <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
     </Head>
     <NProgress />
-    <Component {...pageProps} />
+    <GlobalProvider>
+      <Component {...pageProps} />
+    </GlobalProvider>
   </>
 }
 

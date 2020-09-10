@@ -75,7 +75,9 @@ const Topic = ({ topic, user }) => {
                               <span className="text-xs ml-1">{item.ups.length}</span>
                             </span>
                           </div>
-                          <div className="prose prose-sm max-w-none mb-4" dangerouslySetInnerHTML={{ __html: item.content }}></div>
+                          <div className="prose prose-sm max-w-none mb-4">
+                            <div dangerouslySetInnerHTML={{ __html: item.content }}></div>
+                          </div>
                         </div>
                       </li>
                     ))
