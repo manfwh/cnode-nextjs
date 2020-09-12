@@ -6,8 +6,7 @@ import Layout from '@/components/Layout'
 import TopicsList from '@/components/TopicsList'
 
 const User = ({ user }) => {
-  console.log(user)
-  if(!user) {
+  if (!user) {
     return <ErrorPage statusCode={404} title="该用户不存在" />
   }
   return (
@@ -20,7 +19,7 @@ const User = ({ user }) => {
           <div className="mb-6">
             <div className="bg-gray-200 text-sm px-2 py-2 rounded-t-md text-gray-400">
               <Link href="/"><a className="text-green-500">主页</a></Link> /
-          </div>
+            </div>
             <div className="bg-white px-2 py-2 rounded-b-md">
               <div className="flex">
                 <img className="w-10 h-10 rounded" src={user.avatar_url} />
@@ -43,7 +42,7 @@ const User = ({ user }) => {
               最近参与的话题
             </div>
             <div className="bg-white rounded-b-md">
-            <TopicsList list={user.recent_replies.slice(0, 5)} />
+              <TopicsList list={user.recent_replies.slice(0, 5)} />
             </div>
           </div>
         </div>

@@ -102,7 +102,7 @@ const Topic = ({ topic, user }) => {
                     “
                     {user.signature ? user.signature : "这家伙很懒，什么个性签名都没有留下。"}
                   ”
-                </div>
+                  </div>
                 </div>
               </div>
               <div className="mb-4">

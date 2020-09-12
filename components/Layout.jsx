@@ -16,7 +16,7 @@ const Layout = ({children }) => {
     <header className="bg-gray-800">
       <div className="container md:container mx-auto flex items-center justify-between">
         <Link href="/">
-          <a><img src='/cnodejs_light.svg' className="w-32 h-8 my-2" /></a>
+          <a><img src='/cnodejs_light.svg' className="w-24 h-7 my-2" /></a>
         </Link>
         <ul className="flex">
           <li><Link href="/"><a className="text-gray-500 hover:text-white text-sm mx-3">首页</a></Link></li>

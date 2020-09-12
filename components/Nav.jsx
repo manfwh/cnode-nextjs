@@ -13,8 +13,8 @@ const Nav = ({ tabs }) => {
             <a className={clnx(
               'px-2 py-1 rounded',
               {
-                'mx-2 text-green-500': router.query.tab !== item.tab,
-                'text-white bg-green-500': router.query.tab === item.tab
+                'mx-2 text-green-500': item.tab === 'all' ? router.pathname !== '/' : router.query.tab !== item.tab,
+                'text-white bg-green-500': router.query.tab === item.tab || (router.pathname === '/' && item.tab === 'all')
               }
             )}>{item.name}</a>
           </Link>

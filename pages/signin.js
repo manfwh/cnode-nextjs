@@ -5,7 +5,7 @@ import Layout from '@/components/Layout'
 import { GlobalContext } from '../store'
 const Signin = () => {
   const [token, setToken] = useState('')
-  const {token:accesstoken, setToken: setAccesstoken} = useContext(GlobalContext)
+  const {token:accesstoken, setToken: setAccesstoken, setLoginname} = useContext(GlobalContext)
   const onSubmit = event => {
     event.preventDefault();
     if(token) {
@@ -18,10 +18,12 @@ const Signin = () => {
       })
       .then(res => res.json())
       .then(res => {
-        console.log(res)
         if(res.success) {
           localStorage.setItem('accesstoken', token)
+          localStorage.setItem('loginname', res.loginname)
           setAccesstoken(token)
+          setLoginname(res.loginname)
+
         } else {
           alert(res.error_msg)
         }
@@ -58,7 +60,7 @@ const Signin = () => {
                 </div>
               </div>
               <div className="md:flex md:items-center mb-6">
-                <p className="text-sm text-gray-500">如何获取 accessToken？ 在设置页面可以看到自己的 accessToken。 </p>
+                <p className="text-sm text-gray-500">如何获取 accessToken？ <a className="text-blue-500 font-bold" target="_blank" href="https://cnodejs.org">cnode</a> 社区登录后在设置页面可以看到自己的 accessToken。 </p>
               </div>
               
             </form>
