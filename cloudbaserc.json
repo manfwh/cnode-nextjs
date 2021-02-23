@@ -1,6 +1,7 @@
 {
   "envId": "prod-1239a6",
   "framework": {
+    "name": "cnode",
     "plugins": {
       "client": {
         "use": "@cloudbase/framework-plugin-next",
