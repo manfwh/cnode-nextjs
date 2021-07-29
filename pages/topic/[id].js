@@ -160,26 +160,34 @@ export async function getStaticPaths() {
   }
 }
 export async function getStaticProps({ params }) {
-  const topicResponse = await fetch(`https://cnodejs.org/api/v1/topic/${params.id}?mdrender=false`)
-  const result = await topicResponse.json()
-  if (result.success) {
-    const userResponse = await fetch(`https://cnodejs.org/api/v1/user/${result.data.author.loginname}`)
-    const userResult = await userResponse.json()
-    const content = await markdownToHtml(result.data.content)
-    const replies = await Promise.all(result.data.replies.map(async item => ({ ...item, content: await markdownToHtml(item.content) })))
-    return {
-      props: {
-        topic: {
-          ...result.data,
-          content,
-          replies
+  try {
+    const topicResponse = await fetch(`https://cnodejs.org/api/v1/topic/${params.id}?mdrender=false`)
+    const result = await topicResponse.json()
+    if (result.success) {
+      const userResponse = await fetch(`https://cnodejs.org/api/v1/user/${result.data.author.loginname}`)
+      const userResult = await userResponse.json()
+      const content = await markdownToHtml(result.data.content)
+      const replies = await Promise.all(result.data.replies.map(async item => ({ ...item, content: await markdownToHtml(item.content) })))
+      return {
+        props: {
+          topic: {
+            ...result.data,
+            content,
+            replies
+          },
+          user: userResult.data
         },
-        user: userResult.data
-      },
-      revalidate: 1
+        revalidate: 1
+      }
+    }  
+    return {
+      notFound: true
     }
+  } catch (error) {
+    throw new Error('请求异常')
   }
-  throw new Error('请求异常')
+  
+  
 
 }
 export default Topic
