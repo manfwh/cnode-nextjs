@@ -1,0 +1,17 @@
+{
+  "envId": "prod-1239a6",
+  "framework": {
+    "name": "cnode",
+    "plugins": {
+      "client": {
+        "use": "@cloudbase/framework-plugin-next",
+        "inputs": {
+          "entry": "./",
+          "path": "/next-ssr",
+          "name": "next-ssr",
+          "buildCommand": "npm run build"
+        }
+      }
+    }
+  }
+}
