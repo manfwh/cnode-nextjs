@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import useSWR from 'swr'
 
 const GlobalContext = React.createContext()
 
-export { GlobalContext }
+
+const useGlobalState = () => {
+  return useContext(GlobalContext)
+}
+export { GlobalContext, useGlobalState }
 
 export default function Provider(props) {
   const [token, setToken] = useState()
@@ -20,3 +24,4 @@ export default function Provider(props) {
   }
   return <GlobalContext.Provider value={state}>{props.children}</GlobalContext.Provider>
 }
+

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { SWRConfig } from 'swr'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -15,9 +16,16 @@ function MyApp({ Component, pageProps }) {
       <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
     </Head>
     <NProgress />
-    <GlobalProvider>
-      <Component {...pageProps} />
-    </GlobalProvider>
+    <SWRConfig 
+      value={{
+        fetcher: (...args) => fetch(...args).then(res => res.json())
+      }}
+    >
+      <GlobalProvider>
+        <Component {...pageProps} />
+      </GlobalProvider>
+    </SWRConfig>
+    
   </>
 }
 

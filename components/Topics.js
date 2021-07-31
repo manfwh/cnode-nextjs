@@ -18,7 +18,7 @@ const Topics = () => {
     { name: '分享', tab: 'share' },
     { name: '问答', tab: 'ask' },
     { name: '招聘', tab: 'job' },
-    // { name: '客户端测试', tab: 'dev' },
+    { name: '客户端测试', tab: 'dev' },
   ]
   return (
     <div className="mb-4">
