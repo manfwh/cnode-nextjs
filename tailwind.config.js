@@ -15,6 +15,18 @@ module.exports = {
           white: '#fff',
         },
       },
+      typography: () => ({
+        DEFAULT: {
+          css: [
+            {
+              'p': {
+                'white-space': 'pre-wrap',
+                'word-wrap': 'break-word'
+              }
+            }
+          ]
+        }
+      })
     },
   },
   variants: {

@@ -1,20 +1,20 @@
-import NProgress from 'nprogress';
-import Router from 'next/router';
+import NProgress from 'nprogress'
+import Router from 'next/router'
 
-let timeout;
+let timeout
 
 const start = () => {
-  timeout = setTimeout(NProgress.start, 100);
-};
+  timeout = setTimeout(NProgress.start, 100)
+}
 
 const done = () => {
-  clearTimeout(timeout);
-  NProgress.done();
-};
+  clearTimeout(timeout)
+  NProgress.done()
+}
 
-Router.events.on('routeChangeStart', start);
-Router.events.on('routeChangeComplete', done);
-Router.events.on('routeChangeError', done);
+Router.events.on('routeChangeStart', start)
+Router.events.on('routeChangeComplete', done)
+Router.events.on('routeChangeError', done)
 
 export default function Progress() {
   return (
@@ -48,5 +48,5 @@ export default function Progress() {
         }
       `}
     </style>
-  );
+  )
 }

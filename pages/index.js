@@ -24,7 +24,7 @@ export default function Home() {
                   <div className="bg-white px-2 py-2 rounded-b-md">
                   <div className="flex items-center">
                     <Link href="/user/[name]" as={`/user/${user.loginname}`}>
-                      <a title={user.loginname}><img src={user.avatar_url} className="w-12 h-12 rounded" /></a>
+                      <a title={user.loginname}><img src={user.avatar_url} alt="avatar" className="w-12 h-12 rounded" /></a>
                     </Link>
                     <Link href="/user/[name]" as={`/user/${user.loginname}`}>
                       <a><span className="ml-3 text-gray-600">{user.loginname}</span></a>
@@ -52,7 +52,7 @@ export default function Home() {
           <div className="bg-gray-200 text-sm px-2 py-2 rounded-t-md text-gray-600 mt-4">关于</div>
           <div className="bg-white p-4">
             <p className="text-sm mb-4">本项目只用作学习与交流，源码地址：</p>
-            <a className="text-sm" target="_blank" href="https://github.com/manfwh/cnode-nextjs">https://github.com/manfwh/cnode-nextjs</a>
+            <a className="text-sm" target="_blank" without="true" rel="noreferrer" href="https://github.com/manfwh/cnode-nextjs">https://github.com/manfwh/cnode-nextjs</a>
           </div>
         </div>
       </div>

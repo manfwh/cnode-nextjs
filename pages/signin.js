@@ -60,7 +60,8 @@ const Signin = () => {
                 </div>
               </div>
               <div className="md:flex md:items-center mb-6">
-                <p className="text-sm text-gray-500">如何获取 accessToken？ <a className="text-blue-500 font-bold" target="_blank" href="https://cnodejs.org">cnode</a> 社区登录后在设置页面可以看到自己的 accessToken。 </p>
+                <p className="text-sm text-gray-500">如何获取 accessToken？ 
+                  <a className="text-blue-500 font-bold" target="_blank" without="true" rel="noreferrer" href="https://cnodejs.org">cnode</a> 社区登录后在设置页面可以看到自己的 accessToken。 </p>
               </div>
               
             </form>

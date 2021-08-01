@@ -2,6 +2,13 @@
 body {
   @apply bg-gray-100
 }
+.prose pre code {
+  white-space: pre-wrap;
+}
+.prose p {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 @tailwind components;
 
 @tailwind utilities;

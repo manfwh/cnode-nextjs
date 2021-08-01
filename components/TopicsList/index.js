@@ -11,7 +11,7 @@ const Topics = (props) => {
           <div className="flex items-center">
             <Link href="/user/[name]" as={`/user/${item.author.loginname}`}>
               <a title={item.author.loginname} className="flex-shrink-0 pr-2 md:pr-0">
-                <img className="w-8 h-8 rounded-sm" src={item.author.avatar_url} />
+                <img className="w-8 h-8 rounded-sm" src={item.author.avatar_url} alt="avatar" />
               </a>
             </Link>
             {item.visit_count > -1 && (

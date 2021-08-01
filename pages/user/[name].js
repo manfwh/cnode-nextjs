@@ -22,7 +22,7 @@ const User = ({ user }) => {
             </div>
             <div className="bg-white px-2 py-2 rounded-b-md">
               <div className="flex">
-                <img className="w-10 h-10 rounded" src={user.avatar_url} />
+                <img className="w-10 h-10 rounded" src={user.avatar_url} alt="avatar" />
                 <span className="text-gray-600 ml-2">{user.loginname}</span>
               </div>
               <div className="text-sm mt-3">{user.score} 积分</div>
