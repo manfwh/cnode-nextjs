@@ -116,7 +116,7 @@ const Topic = ({ topic }) => {
   const router = useRouter()
   const { token } = useGlobalState()
   const user = useUser(topic?.author?.loginname)
-  const replies = useReplies(topic?.id)
+  const {replies, mutateReplies} = useReplies(topic?.id)
   const getTabName = (tab) => {
     if (tab === 'share') {
       return '分享'
@@ -140,8 +140,18 @@ const Topic = ({ topic }) => {
         },
         body: `accesstoken=${token}`,
       }).then((res) => res.json())
+        .then((res) => {
+          mutateReplies({
+            replies: replies.map(item => item.id === reply.id ? ({
+              ...item,
+              is_uped: res.action === 'up',
+              // TODO:
+              ups: res.action === 'up' ? [...item.ups, true] : [...item.ups.slice(0, item.ups.length - 1)]
+            }) : item)
+          })
+        })
     },
-    [token]
+    [mutateReplies, replies, token]
   )
   if (!router.isFallback && !topic.id) {
     return <ErrorPage statusCode={404} />

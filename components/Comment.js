@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import Link from 'next/link'
 import dayjs from "dayjs";
-
+import cn from 'classnames'
 import ThumbUpIcon from "@/components/svg/ThumbUp";
 
 const Comment = ({ comment, index, onUpClick }) => {
@@ -34,11 +34,11 @@ const Comment = ({ comment, index, onUpClick }) => {
             </a>
           </div>
           <span
-            className="flex comments-center cursor-pointer"
+            className={cn('flex comments-center cursor-pointer', comment.is_uped ? 'text-blue-500' : 'text-gray-600')}
             onClick={() => onUpClick(comment)}
           >
             <ThumbUpIcon
-              className="w-4 h-4 text-gray-600 hover:text-gray-700 cursor-pointer"
+              className="w-4 h-4"
               title="喜欢"
             />
             <span className="text-xs ml-1">{comment.ups.length}</span>
