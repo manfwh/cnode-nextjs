@@ -9,6 +9,12 @@ body {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+.slate-ul{
+  @apply list-disc
+}
+.slate-ol {
+  @apply list-decimal
+}
 @tailwind components;
 
 @tailwind utilities;

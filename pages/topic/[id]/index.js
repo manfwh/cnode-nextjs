@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -7,10 +7,10 @@ import Layout from '@/components/Layout'
 import Comment from '@/components/Comment'
 import dayjs from 'dayjs'
 import { useGlobalState } from '/store'
-import markdownToHtml from '../../lib/markdownToHtml'
+import markdownToHtml from '/lib/markdownToHtml'
 import useUser from '/data/useUser'
-import useReplies from '/data/useReplies'
-import '../../styles/topic.module.css'
+import useTopic from '/data/useTopic'
+import '/styles/topic.module.css'
 
 const LinkList = ({ list }) => {
   if (!list) {
@@ -114,9 +114,12 @@ const UserAside = ({ user }) => {
 }
 const Topic = ({ topic }) => {
   const router = useRouter()
-  const { token } = useGlobalState()
+  const { token, user: currentUser } = useGlobalState()
   const user = useUser(topic?.author?.loginname)
-  const {replies, mutateReplies} = useReplies(topic?.id)
+  const { data, mutateTopic } = useTopic(topic?.id)
+  const replies = useMemo(() => {
+    return data ? data.replies : []
+  }, [data])
   const getTabName = (tab) => {
     if (tab === 'share') {
       return '分享'
@@ -139,25 +142,34 @@ const Topic = ({ topic }) => {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: `accesstoken=${token}`,
-      }).then((res) => res.json())
+      })
+        .then((res) => res.json())
         .then((res) => {
-          mutateReplies({
-            replies: replies.map(item => item.id === reply.id ? ({
-              ...item,
-              is_uped: res.action === 'up',
-              // TODO:
-              ups: res.action === 'up' ? [...item.ups, true] : [...item.ups.slice(0, item.ups.length - 1)]
-            }) : item)
+          mutateTopic({
+            replies: replies.map((item) =>
+              item.id === reply.id
+                ? {
+                    ...item,
+                    is_uped: res.action === 'up',
+                    // TODO:
+                    ups:
+                      res.action === 'up'
+                        ? [...item.ups, true]
+                        : [...item.ups.slice(0, item.ups.length - 1)],
+                  }
+                : item
+            ),
           })
         })
     },
-    [mutateReplies, replies, token]
+    [mutateTopic, replies, token]
   )
   if (!router.isFallback && !topic.id) {
     return <ErrorPage statusCode={404} />
   }
+
   return (
-    <Layout>
+    <>
       {topic?.title && (
         <Head>
           <title>{topic.title}</title>
@@ -166,7 +178,7 @@ const Topic = ({ topic }) => {
       {router.isFallback ? (
         <div className="text-center py-8 text-gray-600">拼命加载中...</div>
       ) : (
-        <div className="container md:container mx-auto grid grid-cols-1 md:grid-cols-main">
+        <div className="max-w-3xl mx-auto xl:max-w-7xl grid grid-cols-1 md:grid-cols-main">
           <div>
             <article className="bg-white rounded flex-grow">
               <div className="py-2 px-2 border-b border-gray-300 border-solid">
@@ -191,6 +203,13 @@ const Topic = ({ topic }) => {
                     <a className="text-blue-600">{getTabName(topic.tab)}</a>
                   </Link>
                 </div>
+                {currentUser?.id === topic.author_id && (
+                  <div>
+                    <Link href={`/topic/${topic.id}/edit`}>
+                      <a>编辑</a>
+                    </Link>
+                  </div>
+                )}
               </div>
               <section className="px-4 md:px-0">
                 <div
@@ -203,7 +222,11 @@ const Topic = ({ topic }) => {
               <div className="bg-gray-200 rounded-t-md px-2 py-2 text-gray-600">
                 {replies?.length} 回复
               </div>
-              {replies?.length === 0 && <div className="bg-white text-center leading-relaxed text-gray-600 py-12">暂无回复</div>}
+              {replies?.length === 0 && (
+                <div className="bg-white text-center leading-relaxed text-gray-600 py-12">
+                  暂无回复
+                </div>
+              )}
               <ul className="bg-white">
                 {!replies && (
                   <>
@@ -237,8 +260,11 @@ const Topic = ({ topic }) => {
           <UserAside user={user} />
         </div>
       )}
-    </Layout>
+    </>
   )
+}
+Topic.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>
 }
 export async function getStaticPaths() {
   return {
@@ -254,18 +280,11 @@ export async function getStaticProps({ params }) {
     const result = await topicResponse.json()
     if (result.success) {
       const content = await markdownToHtml(result.data.content)
-      const replies = await Promise.all(
-        result.data.replies.map(async (item) => ({
-          ...item,
-          content: await markdownToHtml(item.content),
-        }))
-      )
       return {
         props: {
           topic: {
             ...result.data,
             content,
-            replies,
           },
         },
         revalidate: 1,

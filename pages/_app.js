@@ -11,6 +11,7 @@ dayjs.extend(relativeTime)
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
+  const getLayout = Component.getLayout || ((page) => page)
   return <>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
@@ -22,7 +23,7 @@ function MyApp({ Component, pageProps }) {
       }}
     >
       <GlobalProvider>
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </GlobalProvider>
     </SWRConfig>
     

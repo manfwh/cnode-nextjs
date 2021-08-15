@@ -1,12 +1,8 @@
 {
   "extends": [ "next", "prettier"],
-  "env": {
-    "browser": true,
-    "node": true
-  },
   "rules": {
     "@next/next/no-img-element": 0,
-    "no-unused-vars": "warn"
-    // "no-undef":"error"
+    "no-unused-vars": "warn",
+    "no-undef":"error"
   }
 }

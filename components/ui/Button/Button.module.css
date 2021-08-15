@@ -1,0 +1,49 @@
+.root {
+  @apply bg-green-500 text-white cursor-pointer inline-flex
+  px-4 py-1 h-8 transition ease-in-out duration-150
+  shadow-sm text-center justify-center uppercase
+  border border-transparent items-center text-sm font-semibold
+  rounded-sm
+  select-none
+  tracking-wide;
+  max-height: 64px;
+}
+
+.root:hover {
+  @apply bg-green-600;
+}
+
+.root:focus {
+  @apply outline-none;
+}
+
+.root[data-active] {
+  @apply bg-green-600;
+}
+.large {
+  @apply h-10 py-2
+}
+
+.loading {
+  @apply text-gray-600 cursor-not-allowed;
+}
+
+.slim {
+  @apply py-2 transform-none normal-case;
+}
+
+.ghost {
+  @apply border bg-gray-200 text-black text-sm;
+}
+
+.ghost:hover {
+  @apply border-green-500 bg-gray-300 text-black;
+}
+
+.disabled,
+.disabled:hover {
+  @apply bg-green-300 cursor-not-allowed;
+}
+
+.progress {
+}

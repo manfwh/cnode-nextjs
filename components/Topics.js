@@ -3,6 +3,7 @@ import Link from 'next/link'
 import useSWR from 'swr'
 import Nav from '@/components/Nav'
 import TopicList from './TopicsList'
+import { LoadingDots } from '@/components/ui'
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 const Topics = () => {
   const router = useRouter()
@@ -27,7 +28,7 @@ const Topics = () => {
       </div>
       <div className="bg-white rounded-b-md">
         {!data
-          ? <div className="text-center py-8 text-gray-600">拼命加载中...</div>
+          ? <div className="text-center py-7 text-gray-500"><LoadingDots /></div>
           : data.data?.length === 0 ? <div>暂无数据</div> : (
             <>
               <TopicList list={data.data} tab={tab} />

@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
         <title>仿cnode社区</title>
       </Head>
       <header className="bg-gray-800">
-        <div className="container md:container mx-auto flex items-center justify-between">
+        <div className="max-w-3xl mx-auto xl:max-w-7xl flex items-center justify-between">
           <Link href="/">
             <a>
               <img

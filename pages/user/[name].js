@@ -10,7 +10,7 @@ const User = ({ user }) => {
     return <ErrorPage statusCode={404} title="该用户不存在" />
   }
   return (
-    <Layout>
+    <>
       <Head>
         <title>@{user.loginname}的个人主页 - 仿Cnode技术社区</title>
       </Head>
@@ -18,15 +18,24 @@ const User = ({ user }) => {
         <div>
           <div className="mb-6">
             <div className="bg-gray-200 text-sm px-2 py-2 rounded-t-md text-gray-400">
-              <Link href="/"><a className="text-green-500">主页</a></Link> /
+              <Link href="/">
+                <a className="text-green-500">主页</a>
+              </Link>{' '}
+              /
             </div>
             <div className="bg-white px-2 py-2 rounded-b-md">
               <div className="flex">
-                <img className="w-10 h-10 rounded" src={user.avatar_url} alt="avatar" />
+                <img
+                  className="w-10 h-10 rounded"
+                  src={user.avatar_url}
+                  alt="avatar"
+                />
                 <span className="text-gray-600 ml-2">{user.loginname}</span>
               </div>
               <div className="text-sm mt-3">{user.score} 积分</div>
-              <div className="text-gray-600 text-sm mt-3">注册时间 {dayjs(user.create_at).fromNow()}</div>
+              <div className="text-gray-600 text-sm mt-3">
+                注册时间 {dayjs(user.create_at).fromNow()}
+              </div>
             </div>
           </div>
           <div className="mb-6">
@@ -48,15 +57,18 @@ const User = ({ user }) => {
         </div>
         <div>1</div>
       </div>
-    </Layout>
+    </>
   )
 }
+User.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>
+}
 export async function getServerSideProps(context) {
-  const { name } = context.params;
+  const { name } = context.params
   const response = await fetch(`https://cnodejs.org/api/v1/user/${name}`)
   const result = await response.json()
   return {
-    props: { user: result.data ? result.data : null }
+    props: { user: result.data ? result.data : null },
   }
 }
 export default User

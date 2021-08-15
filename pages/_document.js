@@ -13,7 +13,10 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script dangerouslySetInnerHTML={{__html:`
+          {process.env.NODE_ENV === 'production' && (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
             var _hmt = _hmt || [];
             (function() {
               var hm = document.createElement("script");
@@ -21,7 +24,10 @@ class MyDocument extends Document {
               var s = document.getElementsByTagName("script")[0]; 
               s.parentNode.insertBefore(hm, s);
             })();
-          `}}/>
+          `,
+              }}
+            />
+          )}
         </body>
       </Html>
     )
