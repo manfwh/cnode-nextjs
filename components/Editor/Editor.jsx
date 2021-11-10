@@ -20,12 +20,15 @@ import {
   ELEMENT_IMAGE,
   createSelectOnBackspacePlugin,
 
-  ToolbarLink,
+  // ToolbarLink,
   createLinkPlugin,
   createSoftBreakPlugin,
   createBasicElementPlugins,
   createBasicMarkPlugins,
   createDeserializeHTMLPlugin,
+  ELEMENT_CODE_BLOCK,
+  useStoreEditorRef,
+  ToolbarButton
 } from '@udecode/plate'
   
 import {ToolbarButtonsBasicMarks,ToolbarButtonsAlign, ToolbarButtonsList, ToolbarButtonsBasicElements } from './Toolbars'
@@ -34,6 +37,9 @@ import { Link } from '@styled-icons/material/Link';
 
 import {optionsAutoformat} from './autoformatRules'
 import { editableProps, optionsResetBlockTypePlugin, optionsSoftBreakPlugin, optionsExitBreakPlugin } from './pluginOptions'
+import CodeBlockElement from './Element/code-block'
+import ToolbarLink from './Element/link-ui/ToolbarLink'
+
 const Editor = (props) => {
   const pluginsMemo  = useMemo(() => {
     const pluginsCore = [createReactPlugin(), createHistoryPlugin()];
@@ -63,7 +69,8 @@ const Editor = (props) => {
   }, [])
   const components = createPlateComponents()
   const options = createPlateOptions()
-  // const editor = useStoreEditorRef(useEventEditorId('focus'));
+  const editor = useStoreEditorRef();
+  components[ELEMENT_CODE_BLOCK] = CodeBlockElement
   return (
     <Plate
       editableProps={editableProps}
@@ -80,6 +87,7 @@ const Editor = (props) => {
         <ToolbarButtonsAlign />
         <ToolbarButtonsList />
         <ToolbarButtonsBasicMarks />
+        <ToolbarButton icon={<Link />} tooltip={{ content: '超链接' }} />
       </HeadingToolbar>
     </Plate>
   )

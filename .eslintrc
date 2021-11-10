@@ -1,8 +1,8 @@
 {
   "extends": [ "next", "prettier"],
   "rules": {
-    "@next/next/no-img-element": 0
-    // "no-unused-vars": "warn",
-    // "no-undef":"error"
+    "@next/next/no-img-element": 0,
+    "no-unused-vars": "warn",
+    "no-undef":"error"
   }
 }

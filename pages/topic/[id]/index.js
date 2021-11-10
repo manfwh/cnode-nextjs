@@ -5,6 +5,8 @@ import Link from 'next/link'
 import ErrorPage from 'next/error'
 import Layout from '@/components/Layout'
 import Comment from '@/components/Comment'
+import {Edit as EditIcon } from '@styled-icons/material/Edit'
+
 import dayjs from 'dayjs'
 import { useGlobalState } from '/store'
 import markdownToHtml from '/lib/markdownToHtml'
@@ -118,7 +120,7 @@ const Topic = ({ topic }) => {
   const user = useUser(topic?.author?.loginname)
   const { data, mutateTopic } = useTopic(topic?.id)
   const replies = useMemo(() => {
-    return data ? data.replies : []
+    return data ? data.replies : null
   }, [data])
   const getTabName = (tab) => {
     if (tab === 'share') {
@@ -206,7 +208,9 @@ const Topic = ({ topic }) => {
                 {currentUser?.id === topic.author_id && (
                   <div>
                     <Link href={`/topic/${topic.id}/edit`}>
-                      <a>编辑</a>
+                      <a title="编辑">
+                        <EditIcon className="w-4 text-gray-600" />
+                      </a>
                     </Link>
                   </div>
                 )}
@@ -290,6 +294,7 @@ export async function getStaticProps({ params }) {
         revalidate: 1,
       }
     }
+   
     return {
       notFound: true,
     }

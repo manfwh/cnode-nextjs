@@ -76,13 +76,11 @@ const EditTopic = () => {
   const [errMsg, setErrMsg] = useState('')
   // const editor = useStoreEditorRef(useEventEditorId('focus'));
   const onSubmit = async (e) => {
-    console.log(value, '\nfdfd\ngfgf')
     e.preventDefault()
     const content = value
       .map((v) => serializeToMd(v))
       .filter((v) => v)
       .join('')
-    console.log(content)
     setLoading(true)
     const response = await fetch('https://cnodejs.org/api/v1/topics', {
       method: 'post',
