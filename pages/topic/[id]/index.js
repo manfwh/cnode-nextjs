@@ -175,6 +175,7 @@ const Topic = ({ topic }) => {
       {topic?.title && (
         <Head>
           <title>{topic.title}</title>
+          <meta name="description" content={topic.title} />
         </Head>
       )}
       {router.isFallback ? (
